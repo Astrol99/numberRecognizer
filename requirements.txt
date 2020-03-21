@@ -1,4 +1,5 @@
 tensorflow
 matplotlib
 numpy
-pygame
+kivy
+kivy_deps.sdl2==0.1.*

@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 
 FPS = 144
 WHITE = (255, 255, 255)
@@ -19,6 +20,12 @@ while mainloop:
     mouse_x, mouse_y = pygame.mouse.get_pos()
 
     if continous_circle == True:
+        # Processing data to be used
+        array = pygame.surfarray.array2d(screen) % 256  # Convert decimal to rgb value
+        array = np.resize(array, (28,28))               # Resize to 28x28 resolution
+        array = array / 255.0                           # Convert into value between 0 and 255
+        # Run Model
+        
         pygame.draw.circle(screen, BLACK, (mouse_x, mouse_y), 10)
 
     for event in pygame.event.get():

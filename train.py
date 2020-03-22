@@ -3,6 +3,8 @@ from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
 
+print(f"[*] GPUs Available: {len(tf.config.experimental.list_physical_devices('GPU'))}")
+
 MNIST = keras.datasets.mnist
 
 (train_images, train_labels), (test_images, test_labels) = MNIST.load_data()
@@ -15,3 +17,7 @@ model = keras.Sequential([
     keras.layers.Dense(128, activation='relu'),
     keras.layers.Dense(10)
 ])
+
+model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
+
+model.fit(train_images, train_labels, epochs=10)

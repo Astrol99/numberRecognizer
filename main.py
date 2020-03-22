@@ -1,7 +1,6 @@
 import pygame
 
-FPS = 30
-playtime = 0.0
+FPS = 144
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
 
@@ -17,6 +16,10 @@ continous_circle = False
 
 while mainloop:
     ms = clock.tick(FPS)
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+
+    if continous_circle == True:
+        pygame.draw.circle(screen, BLACK, (mouse_x, mouse_y), 10)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -24,16 +27,16 @@ while mainloop:
 
         # Main drawing controls
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
 
             if (mouse_x >= 10 and mouse_x <= 630) and (mouse_y >= 10 and mouse_y <= 470):
                 pygame.draw.circle(screen, BLACK, (mouse_x, mouse_y), 10)
+                continous_circle = True
 
         elif event.type == pygame.MOUSEBUTTONUP:
-            pass
+            continous_circle = False
 
         elif event.type == pygame.KEYDOWN:
-            
+
             if event.key == pygame.K_ESCAPE:
                 mainloop = False
             

@@ -1,13 +1,21 @@
 import pygame
 import numpy as np
+from tensorflow import keras
 
 FPS = 144
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
 
+def process_data():
+    pass
+
+# Get model
+model = keras.models.load_model('MNIST.h5')
+print("[+] Loaded model -> MNIST.h5")
+
 pygame.init()
 
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((644, 476))
 screen.fill(WHITE)
 
 clock = pygame.time.Clock()
@@ -20,14 +28,6 @@ while mainloop:
     mouse_x, mouse_y = pygame.mouse.get_pos()
 
     if continous_circle == True:
-        # Processing data to be used
-        array = pygame.surfarray.array2d(screen) % 256  # Convert decimal to rgb value
-        array = np.resize(array, (28,28))               # Resize to 28x28 resolution
-        array = array / 255.0                           # Convert into value between 0 and 255
-        # Array for some reason a little bit bigger than anticipated
-
-        # Run Model
-        
         pygame.draw.circle(screen, BLACK, (mouse_x, mouse_y), 10)
 
     for event in pygame.event.get():
@@ -37,12 +37,17 @@ while mainloop:
         # Main drawing controls
         elif event.type == pygame.MOUSEBUTTONDOWN:
 
-            if (mouse_x >= 10 and mouse_x <= 630) and (mouse_y >= 10 and mouse_y <= 470):
+            if (mouse_x >= 10 and mouse_x <= 634) and (mouse_y >= 10 and mouse_y <= 466):
                 pygame.draw.circle(screen, BLACK, (mouse_x, mouse_y), 10)
                 continous_circle = True
 
         elif event.type == pygame.MOUSEBUTTONUP:
             continous_circle = False
+
+            # Run Model
+            predictions = model.predict(img)
+            print(np.argmax(predictions[0]))
+
 
         elif event.type == pygame.KEYDOWN:
 
@@ -50,7 +55,7 @@ while mainloop:
                 mainloop = False
             
             if event.key == pygame.K_SPACE:
-                pygame.draw.rect(screen, WHITE, ((0, 0), (640, 480)))
+                pygame.draw.rect(screen, WHITE, ((0, 0), (634, 466)))
 
     text = f"FPS: {clock.get_fps()}"
     pygame.display.set_caption(text)

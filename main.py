@@ -24,6 +24,8 @@ while mainloop:
         array = pygame.surfarray.array2d(screen) % 256  # Convert decimal to rgb value
         array = np.resize(array, (28,28))               # Resize to 28x28 resolution
         array = array / 255.0                           # Convert into value between 0 and 255
+        # Array for some reason a little bit bigger than anticipated
+
         # Run Model
         
         pygame.draw.circle(screen, BLACK, (mouse_x, mouse_y), 10)

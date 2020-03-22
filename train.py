@@ -21,3 +21,14 @@ model = keras.Sequential([
 model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
 
 model.fit(train_images, train_labels, epochs=10)
+
+# Eval Accuracy
+test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
+print(f"[*] Test Accuracy: {test_acc} Test Loss: {test_loss}")
+
+# Convert layer from logits to probabilities
+probability_model = tf.keras.Sequential([model, keras.layers.Softmax()])
+
+# Save model
+probability_model.save("MNIST.h5")
+print("[+] Saved model as: MNIST.h5")

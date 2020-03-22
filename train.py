@@ -1,7 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
-import matplotlib.pyplot as plt
 
 print(f"[*] GPUs Available: {len(tf.config.experimental.list_physical_devices('GPU'))}")
 

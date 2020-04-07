@@ -1,11 +1,15 @@
 import pygame
+import pygame.freetype
 import numpy as np
 from tensorflow import keras
 from PIL import Image
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
-#FONT = pygame.font.Font
+
+pygame.freetype.init()
+FONT_BIG = pygame.freetype.Font("Resources/OpenSans-Light.ttf", 36)
+FONT_SMALL = pygame.freetype.Font("Resources/OpenSans-Light.ttf", 24)
 
 # Get model
 model = keras.models.load_model('MNIST.h5')
@@ -13,7 +17,7 @@ print("[+] Loaded model -> MNIST.h5")
 
 pygame.init()
 
-screen = pygame.display.set_mode((800, 466))
+screen = pygame.display.set_mode((900, 466))
 screen.fill(BLACK)
 
 pygame.display.set_caption("Number Recognizer")
@@ -33,9 +37,6 @@ def process_data():
 
     return array
 
-# Create line between drawing and info
-pygame.draw.line(screen, WHITE, (640, 0), (640, 466))
-
 """
 def process_data():
     array = pygame.surfarray.array2d(screen)
@@ -48,6 +49,10 @@ def process_data():
 
 mainloop = True
 continous_circle = False
+
+# Render Text
+FONT_BIG.render_to(screen, (695, 80), "Prediction", WHITE)
+FONT_BIG.render_to(screen, (700, 300), "Accuracy", WHITE)
 
 while mainloop:
     mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -72,8 +77,15 @@ while mainloop:
 
             # Run Model
             predictions = model.predict(process_data())
-            print(np.argmax(predictions[0]))
-            print(np.max(predictions[0]))
+            result = str(np.argmax(predictions[0]))
+            accuracy = np.max(predictions[0])
+            accuracy = round(float(accuracy), 3)   # Round to nearest hundreath place
+
+            pygame.draw.rect(screen, BLACK, ((760, 135), (100, 50)))
+            pygame.draw.rect(screen, BLACK, ((735, 350), (200, 50)))
+
+            FONT_SMALL.render_to(screen, (760, 135), result, WHITE)
+            FONT_SMALL.render_to(screen, (735, 350), str(accuracy*100) + "%", WHITE)
 
         elif event.type == pygame.KEYDOWN:
 

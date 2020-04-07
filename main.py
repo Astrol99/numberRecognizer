@@ -35,6 +35,8 @@ def process_data():
     array = array[:, :, 0]
     array = (np.expand_dims(array, 0))
 
+    img.save("postprocess.jpg")
+
     return array
 
 """

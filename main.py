@@ -5,6 +5,7 @@ from PIL import Image
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
+#FONT = pygame.font.Font
 
 # Get model
 model = keras.models.load_model('MNIST.h5')
@@ -52,7 +53,8 @@ while mainloop:
     mouse_x, mouse_y = pygame.mouse.get_pos()
 
     if continous_circle == True:
-        pygame.draw.circle(screen, WHITE, (mouse_x, mouse_y), 10)
+        if (mouse_x >= 10 and mouse_x <= 634) and (mouse_y >= 10 and mouse_y <= 466):
+            pygame.draw.circle(screen, WHITE, (mouse_x, mouse_y), 10)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -79,7 +81,7 @@ while mainloop:
                 mainloop = False
             
             if event.key == pygame.K_SPACE:
-                pygame.draw.rect(screen, BLACK, ((0, 0), (634, 466)))
+                pygame.draw.rect(screen, BLACK, ((0, 0), (640, 466)))
 
     pygame.display.update()
 

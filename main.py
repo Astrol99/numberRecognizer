@@ -81,7 +81,7 @@ while mainloop:
                 mainloop = False
             
             if event.key == pygame.K_SPACE:
-                pygame.draw.rect(screen, BLACK, ((0, 0), (640, 466)))
+                pygame.draw.rect(screen, BLACK, ((0, 0), (645, 466)))
 
     pygame.display.update()
 

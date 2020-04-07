@@ -12,7 +12,7 @@ print("[+] Loaded model -> MNIST.h5")
 
 pygame.init()
 
-screen = pygame.display.set_mode((644, 476))
+screen = pygame.display.set_mode((800, 466))
 screen.fill(BLACK)
 
 pygame.display.set_caption("Number Recognizer")
@@ -28,10 +28,22 @@ def process_data():
     array = np.asarray(img)
     array = array / 255.0
     array = array[:, :, 0]
-    print(array.shape)
     array = (np.expand_dims(array, 0))
 
     return array
+
+# Create line between drawing and info
+pygame.draw.line(screen, WHITE, (640, 0), (640, 466))
+
+"""
+def process_data():
+    array = pygame.surfarray.array2d(screen)
+    array = np.resize(array, (28,28))
+    array = array / 255.0
+    array = np.expand_dims(array, 0)
+    print(array.size)
+    return array
+"""
 
 mainloop = True
 continous_circle = False
@@ -59,6 +71,7 @@ while mainloop:
             # Run Model
             predictions = model.predict(process_data())
             print(np.argmax(predictions[0]))
+            print(np.max(predictions[0]))
 
         elif event.type == pygame.KEYDOWN:
 

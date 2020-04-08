@@ -9,6 +9,9 @@ import os
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
+LIME  = ( 79, 235,  70)
+ORANGE = (209, 152, 61)
+RED =   ( 219, 64,  64)
 
 pygame.freetype.init()
 FONT_BIG = pygame.freetype.Font("Resources/OpenSans-Light.ttf", 36)
@@ -29,6 +32,16 @@ pygame.display.set_caption("Number Recognizer")
 # Temporary folder to store images
 if os.path.isdir("img_tmp") == False:
     os.mkdir("img_tmp")
+
+def determine_color(acc):
+    acc = int(acc)
+
+    if acc >= 90:
+        return LIME
+    elif acc < 90 and acc >= 80:
+        return ORANGE
+    else:
+        return RED
 
 def process_data():
     rect = pygame.Rect((0,0), (634, 466))
@@ -92,12 +105,13 @@ while mainloop:
             result = str(np.argmax(predictions[0]))
             accuracy = np.max(predictions[0])
             accuracy = round(float(accuracy), 5)   # Round to 5th decimal place
+            accuracy = accuracy * 100   # To percentage form
 
             pygame.draw.rect(screen, BLACK, ((760, 135), (100, 50)))
             pygame.draw.rect(screen, BLACK, ((735, 325), (200, 50)))
 
-            FONT_SMALL.render_to(screen, (760, 135), result, WHITE)
-            FONT_SMALL.render_to(screen, (735, 325), str(accuracy*100) + "%", WHITE)
+            FONT_SMALL.render_to(screen, (760, 135), result, LIME)
+            FONT_SMALL.render_to(screen, (735, 325), str(accuracy) + "%", determine_color(accuracy))
 
         elif event.type == pygame.KEYDOWN:
 

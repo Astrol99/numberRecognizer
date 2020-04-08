@@ -63,7 +63,7 @@ continous_circle = False
 # Render Text
 FONT_SUPA_SMALL.render_to(screen, (730, 10), "By: Astrol99", WHITE)
 FONT_BIG.render_to(screen, (695, 80), "Prediction", WHITE)
-FONT_BIG.render_to(screen, (700, 300), "Accuracy", WHITE)
+FONT_BIG.render_to(screen, (700, 275), "Accuracy", WHITE)
 FONT_SUPA_SMALL.render_to(screen, (700, 430), "Press Space To Clear", WHITE)
 
 while mainloop:
@@ -94,10 +94,10 @@ while mainloop:
             accuracy = round(float(accuracy), 5)   # Round to 5th decimal place
 
             pygame.draw.rect(screen, BLACK, ((760, 135), (100, 50)))
-            pygame.draw.rect(screen, BLACK, ((735, 350), (200, 50)))
+            pygame.draw.rect(screen, BLACK, ((735, 325), (200, 50)))
 
             FONT_SMALL.render_to(screen, (760, 135), result, WHITE)
-            FONT_SMALL.render_to(screen, (735, 350), str(accuracy*100) + "%", WHITE)
+            FONT_SMALL.render_to(screen, (735, 325), str(accuracy*100) + "%", WHITE)
 
         elif event.type == pygame.KEYDOWN:
 

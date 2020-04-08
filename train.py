@@ -1,6 +1,5 @@
 import tensorflow as tf
 from tensorflow import keras
-import numpy as np
 
 print(f"[*] GPUs Available: {len(tf.config.experimental.list_physical_devices('GPU'))}")
 
@@ -19,7 +18,7 @@ model = keras.Sequential([
 
 model.compile(optimizer='adam', loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
 
-model.fit(train_images, train_labels, epochs=50)
+model.fit(train_images, train_labels, epochs=20)
 
 # Eval Accuracy
 test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)

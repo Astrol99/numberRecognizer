@@ -6,8 +6,6 @@ from PIL import Image
 import os
 
 # TODO: Use array directly from surface rather than screenshotting the window
-# TODO: Don't round accuracy, just make space for it
-# TODO: Expand clear box just a lil longer
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
@@ -106,7 +104,7 @@ while mainloop:
                 mainloop = False
             
             if event.key == pygame.K_SPACE:
-                pygame.draw.rect(screen, BLACK, ((0, 0), (645, 466)))
+                pygame.draw.rect(screen, BLACK, ((0, 0), (655, 466)))
 
     pygame.display.update()
 

@@ -5,6 +5,10 @@ from tensorflow import keras
 from PIL import Image
 import os
 
+# TODO: Don't round accuracy, just make space for it
+# TODO: Add text to describe keys. Space: to clear
+# TODO: Somehow fix that bad accuracy
+
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
 
@@ -33,7 +37,7 @@ def process_data():
     pygame.image.save(sub, "img_tmp/screenshot.jpg")
 
     img = Image.open("img_tmp/screenshot.jpg")
-    img = img.resize((28,28), Image.ANTIALIAS)
+    img = img.resize((28,28))
 
     array = np.asarray(img)
     array = array / 255.0
@@ -66,7 +70,7 @@ while mainloop:
 
     if continous_circle == True:
         if (mouse_x >= 10 and mouse_x <= 634) and (mouse_y >= 10 and mouse_y <= 466):
-            pygame.draw.circle(screen, WHITE, (mouse_x, mouse_y), 10)
+            pygame.draw.circle(screen, WHITE, (mouse_x, mouse_y), 15)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -76,7 +80,7 @@ while mainloop:
         elif event.type == pygame.MOUSEBUTTONDOWN:
 
             if (mouse_x >= 10 and mouse_x <= 634) and (mouse_y >= 10 and mouse_y <= 466):
-                pygame.draw.circle(screen, WHITE, (mouse_x, mouse_y), 10)
+                pygame.draw.circle(screen, WHITE, (mouse_x, mouse_y), 15)
                 continous_circle = True
 
         elif event.type == pygame.MOUSEBUTTONUP:

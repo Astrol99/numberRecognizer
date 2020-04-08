@@ -92,7 +92,7 @@ while mainloop:
             predictions = model.predict(process_data())
             result = str(np.argmax(predictions[0]))
             accuracy = np.max(predictions[0])
-            accuracy = round(float(accuracy), 3)   # Round to nearest hundreath place
+            accuracy = round(float(accuracy), 5)   # Round to 5th decimal place
 
             pygame.draw.rect(screen, BLACK, ((760, 135), (100, 50)))
             pygame.draw.rect(screen, BLACK, ((735, 350), (200, 50)))

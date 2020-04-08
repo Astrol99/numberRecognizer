@@ -3,6 +3,7 @@ import pygame.freetype
 import numpy as np
 from tensorflow import keras
 from PIL import Image
+import os
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
@@ -22,12 +23,16 @@ screen.fill(BLACK)
 
 pygame.display.set_caption("Number Recognizer")
 
+# Temporary folder to store images
+if os.path.isdir("img_tmp") == False:
+    os.mkdir("img_tmp")
+
 def process_data():
     rect = pygame.Rect((0,0), (634, 466))
     sub = screen.subsurface(rect)
-    pygame.image.save(sub, "screenshot.jpg")
+    pygame.image.save(sub, "img_tmp/screenshot.jpg")
 
-    img = Image.open("screenshot.jpg")
+    img = Image.open("img_tmp/screenshot.jpg")
     img = img.resize((28,28), Image.ANTIALIAS)
 
     array = np.asarray(img)
@@ -35,7 +40,7 @@ def process_data():
     array = array[:, :, 0]
     array = (np.expand_dims(array, 0))
 
-    img.save("postprocess.jpg")
+    img.save("img_tmp/postprocess.jpg")
 
     return array
 

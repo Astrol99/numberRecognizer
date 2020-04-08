@@ -5,9 +5,9 @@ from tensorflow import keras
 from PIL import Image
 import os
 
+# TODO: Use array directly from surface rather than screenshotting the window
 # TODO: Don't round accuracy, just make space for it
-# TODO: Add text to describe keys. Space: to clear
-# TODO: Somehow fix that bad accuracy
+# TODO: Expand clear box just a lil longer
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
@@ -15,6 +15,7 @@ BLACK = (  0,   0,   0)
 pygame.freetype.init()
 FONT_BIG = pygame.freetype.Font("Resources/OpenSans-Light.ttf", 36)
 FONT_SMALL = pygame.freetype.Font("Resources/OpenSans-Light.ttf", 24)
+FONT_SUPA_SMALL = pygame.freetype.Font("Resources/OpenSans-Light.ttf", 16)
 
 # Get model
 model = keras.models.load_model('MNIST.h5')
@@ -64,6 +65,7 @@ continous_circle = False
 # Render Text
 FONT_BIG.render_to(screen, (695, 80), "Prediction", WHITE)
 FONT_BIG.render_to(screen, (700, 300), "Accuracy", WHITE)
+FONT_SUPA_SMALL.render_to(screen, (700, 430), "Press Space To Clear", WHITE)
 
 while mainloop:
     mouse_x, mouse_y = pygame.mouse.get_pos()

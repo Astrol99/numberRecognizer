@@ -6,6 +6,7 @@ from PIL import Image
 import os
 
 # TODO: Use array directly from surface rather than screenshotting the window
+# ^ Make seperate surface to draw, clear surface, get array of surface
 
 WHITE = (255, 255, 255)
 BLACK = (  0,   0,   0)
@@ -59,16 +60,6 @@ def process_data():
     img.save("img_tmp/postprocess.jpg")
 
     return array
-
-"""
-def process_data():
-    array = pygame.surfarray.array2d(screen)
-    array = np.resize(array, (28,28))
-    array = array / 255.0
-    array = np.expand_dims(array, 0)
-    print(array.size)
-    return array
-"""
 
 mainloop = True
 continous_circle = False

@@ -1,5 +1,6 @@
 # numberRecognizer
-A program that recognizes hand-written numbers with keras
+A program that recognizes hand-written numbers with keras. WARNING: it's kinda bad
+![Program_Demo](https://github.com/Astrol99/numberRecognizer/blob/master/Resources/demo.gif)
 ## Setup
 1. Clone or download this repo
 ```

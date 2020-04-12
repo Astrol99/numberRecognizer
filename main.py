@@ -67,7 +67,7 @@ continous_circle = False
 # Render Text
 FONT_SUPA_SMALL.render_to(screen, (730, 10), "By: Astrol99", WHITE)
 FONT_BIG.render_to(screen, (695, 80), "Prediction", WHITE)
-FONT_BIG.render_to(screen, (700, 275), "Accuracy", WHITE)
+FONT_BIG.render_to(screen, (685, 275), "Confidence", WHITE)
 FONT_SUPA_SMALL.render_to(screen, (700, 430), "Press Space To Clear", WHITE)
 
 while mainloop:
